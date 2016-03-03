@@ -7,6 +7,7 @@
 --
 
 require("pid")
+require("component")
 
 turbines = component.list("turbine")
 
