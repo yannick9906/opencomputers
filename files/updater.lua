@@ -5,6 +5,8 @@
 -- Time: 18:25
 -- To change this template use File | Settings | File Templates.
 --
+require("shell")
+
 shell.execute("rm turbines.lua")
 shell.execute("rm updater.lua")
 shell.execute("wget https://bitbucket.org/yannick9906/opencomputers/raw/master/files/turbines.lua")
