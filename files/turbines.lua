@@ -6,8 +6,8 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("pid")
-require("component")
+local pid = require("pid")
+local component = require("component")
 
 turbines = component.list("turbine")
 

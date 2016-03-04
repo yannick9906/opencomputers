@@ -5,7 +5,7 @@
 -- Time: 18:25
 -- To change this template use File | Settings | File Templates.
 --
-require("shell")
+local shell = require("shell")
 
 shell.execute("rm turbines.lua")
 shell.execute("rm updater.lua")
