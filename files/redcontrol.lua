@@ -72,6 +72,7 @@ function load()
 end
 
 function drawTab(tab)
+    print(tab)
     tab_posY = tab["id"]*3 + 1
     if tab["active"] then
         gpu.setBackground(background_primary)
@@ -93,15 +94,11 @@ function handleTabTouchSel(tab, touch_posY)
     end
 end
 
-function iterateTabs(action, arg1)
-    for i, v in ipairs(data["tabs"]) do
-        action(v, arg1)
-    end
-end
-
 function myEventHandlers.touch(adress, screenX, screenY, playerName)
     if screenX <= screenSizeX*tab_width then
-        iterateTabs("handleTabTouchSel", screenY)
+        for i, v in ipairs(data["tabs"]) do
+            handleTabTouchSel(v, screenY)
+        end
     end
 end
 
@@ -115,7 +112,9 @@ end
 function update()
     gpu.setBackground(background_disabled)
     gpu.fill(1, 1, screenSizeX, screenSizeY, " ")
-    iterateTabs("drawTab")
+    for i, v in ipairs(data["tabs"]) do
+        drawTab(v)
+    end
 end
 
 load()
