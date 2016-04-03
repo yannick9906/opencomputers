@@ -10,6 +10,8 @@ local term = require("term")
 local event = require "event" -- load event table and store the pointer to it in event
 
 local gpu = component.gpu -- get primary gpu component
+local screen = component.screen
+screen.setTouchModeInverted(true)
 
 local char_space = string.byte(" ") -- numerical representation of the space char
 
