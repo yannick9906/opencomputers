@@ -46,8 +46,8 @@ function myEventHandlers.key_up(adress, char, code, playerName)
 end
 
 function iterateTabs(...)
-    while i < #myTabNames do
-        myTabs[myTabNames[i]](...)
+    for i, v in ipairs(myTabNames) do
+        myTabs[v](...)
     end
 end
 
