@@ -38,13 +38,12 @@ function myEventHandlers.key_up(adress, char, code, playerName)
     end
 end
 
-function myEventHandlers.click(adress, screenX, screenY, playerName)
-    print("Click at "..screenX..","..screenY.." by "..playerName)
+function myEventHandlers.touch(adress, screenX, screenY, playerName)
+    print("Touch at "..screenX..","..screenY.." by "..playerName)
 end
 
 -- The main event handler as function to separate eventID from the remaining arguments
 function handleEvent(eventID, ...)
-    print(eventID)
     if (eventID) then -- can be nil if no event was pulled for some time
     myEventHandlers[eventID](...) -- call the appropriate event handler with all remaining arguments
     end
