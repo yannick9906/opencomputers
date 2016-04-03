@@ -60,7 +60,5 @@ end
 load()
 
 while running do
-    event.listen("key_up", handleEvent)
-    event.listen("click", handleEvent)
-    os.sleep(0.5)
+    handleEvent(event.pull())
 end
