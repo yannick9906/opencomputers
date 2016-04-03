@@ -20,7 +20,7 @@ local background_disabled = 0xC8C8C8
 
 local running = true -- state variable so the loop can terminate
 local WELCOME_TEXT = "Loading RedControl..."
-local sreenSizeX, screenSizeY = gpu.getResolution()
+local screenSizeX, screenSizeY = gpu.getResolution()
 
 function unknownEvent()
     -- do nothing if the event wasn't relevant
