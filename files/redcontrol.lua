@@ -81,7 +81,7 @@ function myTabs.ME(action, active)
     end
 end
 
-function udpate()
+function update()
     gpu.setBackground(background_disabled)
     myTabs["ME"]("drawTab", 0 == currentTab)
 end
