@@ -29,6 +29,21 @@ local screenSizeX, screenSizeY = gpu.getResolution()
 
 local currentTab = 0
 
+local data = {
+    tabs = {
+        ME = {
+            id = 0,
+            tabname = "ME",
+            active = true
+        },
+        Strom = {
+            id = 1,
+            tabname = "Strom",
+            active = false
+        }
+    }
+}
+
 function unknownEvent()
     -- do nothing if the event wasn't relevant
 end
@@ -45,25 +60,6 @@ function myEventHandlers.key_up(adress, char, code, playerName)
     end
 end
 
-function iterateTabs(action, arg1)
-    for i, v in ipairs(myTabNames) do
-        myTabs[v](action, i-1 == currentTab, arg1)
-    end
-end
-
-function myEventHandlers.touch(adress, screenX, screenY, playerName)
-    if screenX <= screenSizeX*tab_width then
-        iterateTabs("touchSel", screenY)
-    end
-end
-
--- The main event handler as function to separate eventID from the remaining arguments
-function handleEvent(eventID, ...)
-    if (eventID) then -- can be nil if no event was pulled for some time
-    myEventHandlers[eventID](...) -- call the appropriate event handler with all remaining arguments
-    end
-end
-
 function writeCenteredText(text, y)
     term.setCursor((screenSizeX/2) - (string.len(text)/2), screenSizeY/2);
     term.write(text)
@@ -75,41 +71,44 @@ function load()
     writeCenteredText(WELCOME_TEXT, screenSizeY/2)
 end
 
-function myTabs.ME(action, active, arg1)
-    if action == "drawTab" then
-        if active then
-            gpu.setBackground(background_primary)
-            gpu.setForeground(foreground_primary)
-        else
-            gpu.setBackground(background_disabled)
-            gpu.setForeground(foreground_disabled)
-        end
-        gpu.fill(1,1,screenSizeX*tab_width,3," ")
-        term.setCursor(2,2)
-        term.write("ME")
-    elseif action == "touchSel" then
-        if arg1 <= 3 and arg1 >= 1 then
-            currentTab = 0
-        end
+function drawTab(tab)
+    tab_posY = tab["id"]*3 + 1
+    if tab["active"] then
+        gpu.setBackground(background_primary)
+        gpu.setForeground(foreground_primary)
+    else
+        gpu.setBackground(background_disabled)
+        gpu.setForeground(foreground_disabled)
+    end
+    gpu.fill(1,tab_posY,screenSizeX*tab_width,3," ")
+    term.setCursor(2,tab_posY + 1)
+    term.write(tab["tabname"])
+end
+
+function handleTabTouchSel(tab, touch_posY)
+    tab_posY = tab["id"]*3 + 1
+    if touch_posY <= tab_posY+3 and touch_posY >= tab_posY then
+        currentTab = tab["id"]
+        tab["active"] = true
     end
 end
 
-function myTabs.Strom(action, active, arg1)
-    if action == "drawTab" then
-        if active then
-            gpu.setBackground(background_primary)
-            gpu.setForeground(foreground_primary)
-        else
-            gpu.setBackground(background_disabled)
-            gpu.setForeground(foreground_disabled)
-        end
-        gpu.fill(1,4,screenSizeX*tab_width,3," ")
-        term.setCursor(2,5)
-        term.write("Strom")
-    elseif action == "touchSel" then
-        if arg1 <= 6 and arg1 >= 4 then
-            currentTab = 1
-        end
+function iterateTabs(action, arg1)
+    for i, v in ipairs(data["tabs"]) do
+        action(v, arg1)
+    end
+end
+
+function myEventHandlers.touch(adress, screenX, screenY, playerName)
+    if screenX <= screenSizeX*tab_width then
+        iterateTabs("handleTabTouchSel", screenY)
+    end
+end
+
+-- The main event handler as function to separate eventID from the remaining arguments
+function handleEvent(eventID, ...)
+    if (eventID) then -- can be nil if no event was pulled for some time
+    myEventHandlers[eventID](...) -- call the appropriate event handler with all remaining arguments
     end
 end
 

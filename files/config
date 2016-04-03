@@ -1,0 +1,10 @@
+{
+    tabs = {
+        ME = {
+            tabname = "ME"
+        },
+        Strom = {
+            tabname = "Strom"
+        }
+    }
+}
