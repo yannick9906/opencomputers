@@ -36,6 +36,7 @@ end
 -- table that holds all event handlers, and in case no match can be found returns the dummy function unknownEvent
 local myEventHandlers = setmetatable({}, { __index = function() return unknownEvent end })
 local myTabs = setmetatable({})
+local myTabNames = {"ME", "Strom"}
 
 -- Example key-handler that simply sets running to false if the user hits space
 function myEventHandlers.key_up(adress, char, code, playerName)
@@ -44,8 +45,16 @@ function myEventHandlers.key_up(adress, char, code, playerName)
     end
 end
 
+function iterateTabs(...)
+    while i < table.getn(myTabs) do
+        myTabs[myTabNames[i]](...)
+    end
+end
+
 function myEventHandlers.touch(adress, screenX, screenY, playerName)
-    print("Touch at "..screenX..","..screenY.." by "..playerName)
+    if screenX <= screenSizeX*tab_width then
+        iterateTabs("touchSel", screenY)
+    end
 end
 
 -- The main event handler as function to separate eventID from the remaining arguments
@@ -66,7 +75,7 @@ function load()
     writeCenteredText(WELCOME_TEXT, screenSizeY/2)
 end
 
-function myTabs.ME(action, active)
+function myTabs.ME(action, active, arg1)
     if action == "drawTab" then
         if active then
             gpu.setBackground(background_primary)
@@ -75,9 +84,32 @@ function myTabs.ME(action, active)
             gpu.setBackground(background_disabled)
             gpu.setForeground(foreground_disabled)
         end
-        gpu.fill(1,1,screenSizeX*tab_width,3,"")
+        gpu.fill(1,1,screenSizeX*tab_width,3," ")
         term.setCursor(2,2)
         term.write("ME")
+    elseif action == "touchSel" then
+        if arg1 <= 3 and arg1 >= 1 then
+            currentTab = 0
+        end
+    end
+end
+
+function myTabs.Strom(action, active)
+    if action == "drawTab" then
+        if active then
+            gpu.setBackground(background_primary)
+            gpu.setForeground(foreground_primary)
+        else
+            gpu.setBackground(background_disabled)
+            gpu.setForeground(foreground_disabled)
+        end
+        gpu.fill(4,1,screenSizeX*tab_width,3," ")
+        term.setCursor(5,2)
+        term.write("Strom")
+    elseif action == "touchSel" then
+        if arg1 <= 6 and arg1 >= 4 then
+            currentTab = 1
+        end
     end
 end
 
@@ -85,6 +117,7 @@ function update()
     gpu.setBackground(background_disabled)
     gpu.fill(1, 1, screenSizeX, screenSizeY, " ")
     myTabs["ME"]("drawTab", 0 == currentTab)
+    myTabs["Strom"]("drawTab", 1 == currentTab)
 end
 
 load()
