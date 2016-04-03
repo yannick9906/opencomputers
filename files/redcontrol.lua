@@ -19,7 +19,7 @@ local char_space = string.byte(" ") -- numerical representation of the space cha
 local foreground_primary  = 0xFFFFFF
 local foreground_disabled = 0xDDDDDD
 local background_primary  = 0x333366
-local background_disabled = 0xC8C8C8
+local background_disabled = 0x777777
 
 local tab_width = 0.2
 
@@ -103,8 +103,8 @@ function myTabs.Strom(action, active)
             gpu.setBackground(background_disabled)
             gpu.setForeground(foreground_disabled)
         end
-        gpu.fill(4,1,screenSizeX*tab_width,3," ")
-        term.setCursor(5,2)
+        gpu.fill(1,4,screenSizeX*tab_width,3," ")
+        term.setCursor(2,5)
         term.write("Strom")
     elseif action == "touchSel" then
         if arg1 <= 6 and arg1 >= 4 then
