@@ -6,7 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 local component = require("component")
-local component = require("term")
+local term = require("term")
 local event = require "event" -- load event table and store the pointer to it in event
 
 local gpu = component.gpu -- get primary gpu component
