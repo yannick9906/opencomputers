@@ -45,9 +45,9 @@ function myEventHandlers.key_up(adress, char, code, playerName)
     end
 end
 
-function iterateTabs(action, args1)
+function iterateTabs(action, arg1)
     for i, v in ipairs(myTabNames) do
-        myTabs[v](action, i == currentTab, args1)
+        myTabs[v](action, i == currentTab, arg1)
     end
 end
 
@@ -94,7 +94,7 @@ function myTabs.ME(action, active, arg1)
     end
 end
 
-function myTabs.Strom(action, active)
+function myTabs.Strom(action, active, arg1)
     if action == "drawTab" then
         if active then
             gpu.setBackground(background_primary)
