@@ -57,10 +57,10 @@ function load()
     writeCenteredText(WELCOME_TEXT, screenSizeY/2)
 end
 
-event.listen("key_up", handleEvent)
-event.listen("click", handleEvent)
 load()
 
 while running do
+    event.listen("key_up", handleEvent)
+    event.listen("click", handleEvent)
     os.sleep(0.5)
 end
