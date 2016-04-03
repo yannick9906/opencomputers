@@ -58,6 +58,7 @@ function load()
 end
 
 event.listen("key_up", handleEvent)
+event.listen("click", handleEvent)
 load()
 
 while running do
