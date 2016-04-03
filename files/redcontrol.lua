@@ -45,9 +45,9 @@ function myEventHandlers.key_up(adress, char, code, playerName)
     end
 end
 
-function iterateTabs(...)
+function iterateTabs(action, args1)
     for i, v in ipairs(myTabNames) do
-        myTabs[v](...)
+        myTabs[v](action, i == currentTab, args1)
     end
 end
 
@@ -116,8 +116,7 @@ end
 function update()
     gpu.setBackground(background_disabled)
     gpu.fill(1, 1, screenSizeX, screenSizeY, " ")
-    myTabs["ME"]("drawTab", 0 == currentTab)
-    myTabs["Strom"]("drawTab", 1 == currentTab)
+    iterateTabs("drawTab")
 end
 
 load()
