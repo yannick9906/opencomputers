@@ -37,9 +37,7 @@ function myEventHandlers.key_up(adress, char, code, playerName)
 end
 
 function myEventHandlers.click(adress, screenX, screenY, playerName)
-    if (char == char_space) then
-        running = false
-    end
+    term.write("Click at "..screenX..","..screenY.." by "..playerName)
 end
 
 -- The main event handler as function to separate eventID from the remaining arguments
@@ -49,16 +47,19 @@ function handleEvent(eventID, ...)
     end
 end
 
+function writeCenteredText(text, y)
+    term.setCursor((screenSizeX/2) - (string.len(text)/2), screenSizeY/2);
+    term.write(text)
+end
 function load()
     gpu.setBackground(background_primary)
     gpu.fill(1, 1, screenSizeX, screenSizeY, " ")
-    term.setCursor((screenSizeX/2) - string.len(WELCOME_TEXT), screenSizeY/2);
-    term.write(WELCOME_TEXT)
+    writeCenteredText(WELCOME_TEXT, screenSizeY/2)
 end
 
 event.listen("key_up", handleEvent)
 load()
 
 while running do
-    os.exit()
+    os.sleep(0.5)
 end
