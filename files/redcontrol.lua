@@ -69,20 +69,21 @@ end
 function myTabs.ME(action, active)
     if action == "drawTab" then
         if active then
-            gpu.setBackgroud(background_primary)
+            gpu.setBackground(background_primary)
             gpu.setForeground(foreground_primary)
         else
-            gpu.setBackgroud(background_disabled)
+            gpu.setBackground(background_disabled)
             gpu.setForeground(foreground_disabled)
         end
-        gpu.fill(0,0,screenSizeX*tab_width,3,"")
-        term.setCursor(1,1)
+        gpu.fill(1,1,screenSizeX*tab_width,3,"")
+        term.setCursor(2,2)
         term.write("ME")
     end
 end
 
 function update()
     gpu.setBackground(background_disabled)
+    gpu.fill(1, 1, screenSizeX, screenSizeY, " ")
     myTabs["ME"]("drawTab", 0 == currentTab)
 end
 
