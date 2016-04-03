@@ -47,7 +47,7 @@ end
 
 function iterateTabs(action, arg1)
     for i, v in ipairs(myTabNames) do
-        myTabs[v](action, i == currentTab, arg1)
+        myTabs[v](action, i-1 == currentTab, arg1)
     end
 end
 
