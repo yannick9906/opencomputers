@@ -13,7 +13,7 @@ local gpu = component.gpu -- get primary gpu component
 
 local char_space = string.byte(" ") -- numerical representation of the space char
 
-local foreground_primary  = 0x000000
+local foreground_primary  = 0xFFFFFF
 local foreground_disabled = 0x000000
 local background_primary  = 0x333366
 local background_disabled = 0xC8C8C8
