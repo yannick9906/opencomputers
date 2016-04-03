@@ -113,6 +113,7 @@ function update()
     gpu.setBackground(background_disabled)
     gpu.fill(1, 1, screenSizeX, screenSizeY, " ")
     for i, v in ipairs(data["tabs"]) do
+        print(i..": "..v)
         drawTab(v)
     end
 end
