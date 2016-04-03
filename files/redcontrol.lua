@@ -36,7 +36,7 @@ end
 -- table that holds all event handlers, and in case no match can be found returns the dummy function unknownEvent
 local myEventHandlers = setmetatable({}, { __index = function() return unknownEvent end })
 local myTabs = setmetatable({})
-local myTabNames = {"ME", "Strom", __len = 2}
+local myTabNames = {"ME", "Strom"}
 
 -- Example key-handler that simply sets running to false if the user hits space
 function myEventHandlers.key_up(adress, char, code, playerName)
