@@ -52,7 +52,7 @@ end
 function load()
     gpu.setBackground(background_primary)
     gpu.fill(1, 1, screenSizeX, screenSizeY, " ")
-    term.setCursor((screenSizeX/2) - WELCOME_TEXT.len(), screenSizeY/2);
+    term.setCursor((screenSizeX/2) - string.len(WELCOME_TEXT), screenSizeY/2);
     term.write(WELCOME_TEXT)
 end
 
