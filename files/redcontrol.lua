@@ -56,6 +56,8 @@ function load()
 end
 
 event.listen("key_up", handleEvent)
+load()
 
 while running do
+    os.exit()
 end
